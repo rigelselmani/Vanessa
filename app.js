@@ -11,6 +11,9 @@ app.get("/collections",function(req,res){
     res.render("Collections")
 })
 
+app.get("/about",function(req,res){
+    res.render("about")
+})
 app.listen(3000, () => {
     console.log(`Example app listening at http://localhost 3000`)
   })
