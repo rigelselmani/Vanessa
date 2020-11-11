@@ -1,6 +1,7 @@
 const express    =require("express"),
       bodyParser = require('body-parser'),
       mongoose   = require("mongoose"),
+      request    = require('request'),
       app        =express();
 
 mongoose.connect('mongodb://localhost:27017/nail', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true,useFindAndModify:false}).then(res=>{
@@ -22,6 +23,41 @@ app.set('view engine', 'ejs');
 app.get("/",function(req,res){
     res.render("Home")
 });
+
+app.post("/",function (req,res){
+    var email=req.body.subscribe
+    var data={
+        members: [
+            {email_address: email,
+            status:"subscribed"
+         }
+        ]
+    }
+    var jsonData=JSON.stringify(data);
+
+    var options = {
+        url:'https://us4.api.mailchimp.com/3.0/lists/d12bda5c1d',
+        method:"POST",
+        headers: {
+            "Authorization":"rigel1 4bc43a983fa50f8683b911e3b3e782b3-us4"
+        },
+        body: jsonData
+    }
+    request(options, function(error, response, body){
+        if(error){
+            res.sendFile(__dirname + "/failure.html");
+            console.log("subscription not successful")
+        }else{
+            if(response.statusCode === 200){
+                res.redirect("/");
+                console.log("subscriptionsuccessful")
+            }else{
+                res.redirect("/")
+                console.log("subscriptionsuccessful")
+            }
+        }
+       });
+})
 
 app.get("/collections",function(req,res){
     Nail.find({},function(err,allNails){
