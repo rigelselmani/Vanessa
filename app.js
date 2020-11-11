@@ -24,9 +24,14 @@ app.get("/",function(req,res){
 });
 
 app.get("/collections",function(req,res){
-    res.render("Collections")
+    Nail.find({},function(err,allNails){
+        if(err){
+            console.log(err)
+        }else{
+            res.render("Collections",{nails:allNails})
+        }
+    })
 })
-
 app.post("/collections",function(req,res){
     const name=req.body.name;
     const image=req.body.image;

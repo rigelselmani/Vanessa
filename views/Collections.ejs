@@ -1,33 +1,18 @@
 <%- include('partials/Header') %>
 
-<div class="row" style="margin-top:100px;">
-  <div class="col-md-3 m-1"></div>
-    <div class="card col-md-2">
-        <img src="https://3.bp.blogspot.com/-NG8E05ITnhU/WNyrUFR7vrI/AAAAAAAAAEM/1YuGI1YYNXEdkSTA14R_EnQYQCAuZus-gCLcB/s1600/237.jpg" class="pt-1 card-img-top " style="height: 250px;" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>   
-      <div class="card col-md-2 m-1">
-        <img src="https://s24193.pcdn.co/wp-content/uploads/2017/08/nail-salons-near-me-ENTITY-Instagram-madisonfrancesbailey-e1504119642941.png" class="pt-1 card-img-top"style="height: 250px;" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
+<div class="container"style="margin-top:100px;">
+  <div class="row">
+    <%nails.forEach(function(nail){%>
+      <div class="card col-md-4 my-1">
+          <img style="height:250px; padding-top:10px;" src="<%= nail.image %>" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><%= nail.name %></h5>
+            <p class="card-text"><%= nail.description %></p>
+            <a href="/" class="btn btn-primary">More</a>
+          </div>
       </div> 
-      <div class="card col-md-2 m-1">
-        <img src="https://s24193.pcdn.co/wp-content/uploads/2017/08/nail-salons-near-me-ENTITY-Instagram-madisonfrancesbailey-e1504119642941.png" class="pt-1 card-img-top"style="height: 250px;" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>  
-      <div class="col-md-3"></div> 
-      
+    <%})%>   
+  </div>
 </div>
 
 <%- include('partials/Footer') %>
