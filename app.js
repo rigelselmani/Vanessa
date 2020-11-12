@@ -1,9 +1,9 @@
-const express       =require("express"),
+const express       = require("express"),
       bodyParser    = require('body-parser'),
       mongoose      = require("mongoose"),
       request       = require('request'),
-      methodOverride=require("method-override"),
-      app           =express();
+      app           = express(),
+      methodOverride= require("method-override");
 
 mongoose.connect('mongodb://localhost:27017/nail', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true,useFindAndModify:false}).then(res=>{
     console.log("DB Connected!")
@@ -18,8 +18,8 @@ var nailSchema = new mongoose.Schema({
 })
 const Nail=mongoose.model('Nail', nailSchema);
 
-app.use(bodyParser.urlencoded({ extended: true }))
 app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
 
 app.get("/",function(req,res){
@@ -30,6 +30,7 @@ app.get("/collections",function(req,res){
     Nail.find({},function(err,allNails){
         if(err){
             console.log(err)
+            console.log("here is the error")
         }else{
             res.render("Collections",{nails:allNails})
         }
@@ -57,21 +58,32 @@ app.get("/new",function(req,res){
 
 
 //Edit nail route
-app.get("/edit/:id",function(req,res){
+app.get("/:id/edit",function(req,res){
     Nail.findById(req.params.id,function(err,foundNail){
-        res.render("edit",{nail:foundNail})
+        res.render("Edit",{nail:foundNail})
     })
 })
 //Update nail route
-app.put("/:id",function (req,res){
+app.put("/collections/:id",function (req,res){
     Nail.findByIdAndUpdate(req.params.id,req.body.nail,function(err,updateNail){
         if(err){
             console.log(err)
             res.redirect("/")
         }else{
             console.log(updateNail)
-            res.redirect("/edit/"+req.params.id)
+            res.redirect("/collections")
         }
+    })
+})
+
+//Delete nail route
+app.delete("/:id",function(req,res){
+    Nail.findByIdAndRemove(req.params.id,function(err){
+        if(err){
+            console.log(err)
+            res.redirect("/collections")
+        }
+        res.redirect("/collections")
     })
 })
 
@@ -85,6 +97,7 @@ app.post("/",function (req,res){
          }
         ]
     }
+
     var jsonData=JSON.stringify(data);
 
     var options = {

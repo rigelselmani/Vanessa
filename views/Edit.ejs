@@ -5,15 +5,15 @@
       <div class="col-md-3"></div>
       <div class="col-md-6">
          <h1 class="text-center mb-4" style="color:#ed44c0">Edit <%=nail.name%></h1>
-        <form action="/edit<%=nail._id%>?_method=PUT" method="POST">
+        <form action="/collections/<%=nail._id%>?_method=PUT" method="POST">
            <div class="form-group">
-              <input class="form-control" type="text" name="name" value="<%=nail.name%>" placeholder="name">
+              <input class="form-control" type="text" name="nail[name]" value="<%=nail.name%>" placeholder="name">
            </div>
            <div class="form-group">
-              <input class="form-control" type="text" name="image"value="<%=nail.image%>" placeholder="image-url">
+              <input class="form-control" type="text" name="nail[image]"value="<%=nail.image%>" placeholder="image-url">
            </div>
            <div class="form-group">
-            <input class="form-control" type="text" name="description"value="<%=nail.description%>" placeholder="description">
+            <input class="form-control" type="text" name="nail[description]"value="<%=nail.description%>" placeholder="description">
          </div>
            <div class="form-group">
               <button class="btn btn-lg btn-primary btn-block"style="background:#ed44c0; color:white">submit</button>
