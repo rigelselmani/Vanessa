@@ -1,26 +1,24 @@
 const express       = require("express"),
       bodyParser    = require('body-parser'),
-      mongoose      = require("mongoose"),
       request       = require('request'),
       app           = express(),
-      methodOverride= require("method-override");
+      methodOverride= require("method-override"),
+      Nail          =require("./models/Nails"),
+      User          =require("./models/User"),
+      mongoose=require("mongoose"),
+      bcrypt=require("bcrypt"),
+      session =require("express-session");
 
-mongoose.connect('mongodb://localhost:27017/nail', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true,useFindAndModify:false}).then(res=>{
-    console.log("DB Connected!")
-}).catch(err => {
-console.log(Error, err.message);
-})
-
-var nailSchema = new mongoose.Schema({
-    name:String,
-    image:String,
-    description:String,
-})
-const Nail=mongoose.model('Nail', nailSchema);
+    mongoose.connect('mongodb://localhost:27017/nail', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true,useFindAndModify:false}).then(res=>{
+        console.log("DB Connected!")
+    }).catch(err => {
+    console.log(Error, err.message);
+    })
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
+app.use(session({resave: true,saveUninitialized: true,secret:'notagoodsecret'}))
 
 app.get("/",function(req,res){
     res.render("Home")
@@ -70,7 +68,6 @@ app.put("/collections/:id",function (req,res){
             console.log(err)
             res.redirect("/")
         }else{
-            console.log(updateNail)
             res.redirect("/collections")
         }
     })
@@ -86,6 +83,45 @@ app.delete("/:id",function(req,res){
         res.redirect("/collections")
     })
 })
+
+//register route
+app.get("/register",async (req,res)=>{
+    res.render("Register")
+})
+app.post("/register",async(req,res)=>{
+    const {password,username}=req.body;
+    const hash = await bcrypt.hash(password,12);
+    const user = new User({
+        username,
+        password:hash
+    })
+    await user.save();
+    req.session.user_id = user._id;
+    res.redirect("/");
+})
+
+//Login route
+app.get("/login",async(req,res)=>{
+    res.render("Login")
+})
+app.post("/login",async(req,res)=>{
+  const {username,password}=req.body;
+  const user = await User.findOne({username})
+  const validPassword = await bcrypt.compare(password,user.password)
+  if(validPassword){
+      req.session.user_id =user._id;
+      res.redirect("/");
+  }else{
+      res.redirect("/login")
+  }
+})
+
+//Log out route
+
+app.post("/logout", (req,res)=>{
+    req.session.user_id===null
+    res.redirect("/");
+ })
 
 //Subscribtion logic get the users email.
 app.post("/",function (req,res){
