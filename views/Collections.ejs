@@ -7,9 +7,9 @@
           <img style="height:250px; padding-top:10px;" src="<%= nail.image %>" alt="...">
           <div class="card-body">
             <h5 class="card-title"><%= nail.name %></h5>
-            <p class="card-text"><%= nail.description %></p>
-            <a href="/<%=nail._id%>/edit/" class="btn btn-primary mr-2 bg-info"style="color:white; border:none;padding:2px 7px 2px 7px;float:left">Edit</a>
-          <form id="delete-form" action="/<%=nail._id%>?_method=DELETE" method="POST">
+            <p class="card-text"><%= nail.description %></p>  
+            <a href="/nails/<%=nail._id%>/edit" class="btn btn-primary mr-2 bg-info"style="color:white; border:none;padding:2px 7px 2px 7px;float:left">Edit</a>
+          <form id="delete-form" action="/nails/<%=nail._id%>?_method=DELETE" method="POST">
             <button  class="btn btn-danger"style="color:white; border:none; padding:2px 5px 2px 5px; float:left;">Delete</button>
           </form>
           </div>
