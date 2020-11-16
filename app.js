@@ -21,7 +21,7 @@ app.use(session({resave: true,saveUninitialized: true,secret:'notagoodsecret'}))
 
 app.use("/nails",showRoutes);
 app.use("/nails",subscribeRoutes);
-app.use("/nails",userRoutes);
+app.use("/",userRoutes);
 
 app.listen(3000, () => {
     console.log(`Example app listening at http://localhost 3000`)
