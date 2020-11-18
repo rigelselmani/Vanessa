@@ -1,0 +1,22 @@
+<%- include('partials/Header') %>
+
+<div class="container text-center mt-4">
+    <h1>This is the show template</h1>
+  <div class="img-thumbnail mx-auto"> 
+    <img src="<%=nail.image%>"style="width:50%;height:340px;">
+  <div class="caption"> 
+    <p><%=nail.name%></p>
+    <p><%= nail.description %></p>
+  </div>
+  <% if(currentUser && currentUser=== "5fb21ff8ea335805a8b9f6fb"){ %>
+    <div class="justify-content-start mt-1">
+        <a href="/<%=nail._id%>/edit" class=" btn btn-primary mr-2 bg-info">Edit</a>
+        <form id="delete-form" action="/<%=nail._id%>?_method=DELETE" method="POST">
+          <button  class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+    <%}%>
+  </div>
+</div>
+
+<%- include('partials/Footer') %>

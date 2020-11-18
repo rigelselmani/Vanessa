@@ -12,11 +12,12 @@ router.get("/collections",function(req,res){
             console.log(err)
             console.log("here is the error")
         }else{
-            res.render("Collections",{nails:allNails})
+            res.render("Collections",{nails:allNails,currentUser:req.user})
         }
     })
 })
 
+//New route 
 router.post("/collections",function(req,res){
     const name=req.body.name;
     const image=req.body.image;
@@ -27,15 +28,26 @@ router.post("/collections",function(req,res){
         if(err){
             console.log(err)
         }else{
-            res.redirect("/nails/collections");
+            res.redirect("/collections");
         }
     })
 })
-//New route 
+
 router.get("/new",function(req,res){
     res.render("new")
 })
 
+//SHOW MORE INFO ABOUT ONE NAIL
+router.get("/nail/:id",function(req,res){
+    //FIND THE NAIL WITH ID PROVIDED
+   Nail.findById(req.params.id,function(err, foundNail){
+      if(err){
+          console.log(err)
+      }else{
+          res.render("Show",{nail:foundNail})
+      }
+   })
+});
 
 //Edit nail route
 router.get("/:id/edit",function(req,res){
@@ -48,9 +60,9 @@ router.put("/collections/:id",function (req,res){
     Nail.findByIdAndUpdate(req.params.id,req.body.nail,function(err,updateNail){
         if(err){
             console.log(err)
-            res.redirect("/nails")
+            res.redirect("")
         }else{
-            res.redirect("/nails/collections")
+            res.redirect("/collections")
         }
     })
 })
@@ -60,9 +72,9 @@ router.delete("/:id",function(req,res){
     Nail.findByIdAndRemove(req.params.id,function(err){
         if(err){
             console.log(err)
-            res.redirect("/nails/collections")
+            res.redirect("/collections")
         }
-        res.redirect("/nails/collections")
+        res.redirect("/collections")
     })
 })
 

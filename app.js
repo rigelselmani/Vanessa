@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
 app.use(session({resave: true,saveUninitialized: true,secret:'notagoodsecret'}))
 
-app.use("/nails",showRoutes);
-app.use("/nails",subscribeRoutes);
+app.use("/",showRoutes);
+app.use("/",subscribeRoutes);
 app.use("/",userRoutes);
 
 app.listen(3000, () => {
