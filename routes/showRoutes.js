@@ -1,6 +1,8 @@
-const express = require("express"),
-      router  = express.Router(),
-      Nail    =require("../models/Nails");
+const express   = require("express"),
+      router    = express.Router(),
+      Nail      =require("../models/Nails"),
+      {isLoggedIn} =require("../midleware");
+      
 
 router.get("/",function(req,res){
     res.render("Home")
@@ -33,7 +35,7 @@ router.post("/collections",function(req,res){
         }
     })
 })
-router.get("/new",function(req,res){
+router.get("/new",isLoggedIn, function(req,res){
     res.render("new")
 })
 
@@ -51,13 +53,13 @@ router.get("/nail/:id",function(req,res){
 });
 
 //Edit nail route
-router.get("/:id/edit",function(req,res){
+router.get("/:id/edit",isLoggedIn,function(req,res){
     Nail.findById(req.params.id,function(err,foundNail){
         res.render("Edit",{nail:foundNail})
     })
 })
 //Update nail route
-router.put("/collections/:id",function (req,res){
+router.put("/collections/:id",isLoggedIn, function (req,res){
     Nail.findByIdAndUpdate(req.params.id,req.body.nail,function(err,updateNail){
         if(!updateNail){
                 req.flash("error","Cannot find that nail")
@@ -69,7 +71,7 @@ router.put("/collections/:id",function (req,res){
 })
 
 //Delete nail route
-router.delete("/:id",function(req,res){
+router.delete("/:id",isLoggedIn,function(req,res){
     Nail.findByIdAndRemove(req.params.id,function(err){
         if(err){
             console.log(err)
