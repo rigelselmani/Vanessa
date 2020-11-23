@@ -28,14 +28,15 @@ router.post("/collections",function(req,res){
         if(err){
             console.log(err)
         }else{
+            req.flash("success","Successfully made a new Nail")
             res.redirect("/collections");
         }
     })
 })
-
 router.get("/new",function(req,res){
     res.render("new")
 })
+
 
 //SHOW MORE INFO ABOUT ONE NAIL
 router.get("/nail/:id",function(req,res){
