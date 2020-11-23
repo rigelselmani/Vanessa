@@ -1,7 +1,7 @@
 <%- include('partials/Header') %>
 
 <div class="container"style="margin-top:100px;">
-  <%=success%>
+  <%- include('partials/flash') %>
   <div class="row">
     <%nails.forEach(function(nail){%>
       <div class="card col-md-4 my-1 .bg-light">

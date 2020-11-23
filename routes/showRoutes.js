@@ -63,6 +63,7 @@ router.put("/collections/:id",function (req,res){
             console.log(err)
             res.redirect("")
         }else{
+            req.flash("success","Successfully updated campground!")
             res.redirect("/collections")
         }
     })
@@ -75,6 +76,7 @@ router.delete("/:id",function(req,res){
             console.log(err)
             res.redirect("/collections")
         }
+        req.flash("success","Successfully deleted campground!")
         res.redirect("/collections")
     })
 })
