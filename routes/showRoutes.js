@@ -42,11 +42,11 @@ router.get("/new",function(req,res){
 router.get("/nail/:id",function(req,res){
     //FIND THE NAIL WITH ID PROVIDED
    Nail.findById(req.params.id,function(err, foundNail){
-      if(err){
-          console.log(err)
-      }else{
-          res.render("Show",{nail:foundNail})
+      if(!foundNail){
+          req.flash("error","Cannot find that nail")
+          return res.redirect("/collections")
       }
+      res.render("Show",{nail:foundNail})
    })
 });
 
@@ -59,13 +59,12 @@ router.get("/:id/edit",function(req,res){
 //Update nail route
 router.put("/collections/:id",function (req,res){
     Nail.findByIdAndUpdate(req.params.id,req.body.nail,function(err,updateNail){
-        if(err){
-            console.log(err)
-            res.redirect("")
-        }else{
-            req.flash("success","Successfully updated campground!")
-            res.redirect("/collections")
+        if(!updateNail){
+                req.flash("error","Cannot find that nail")
+                return res.redirect("/collections")
         }
+            req.flash("success","Successfully updated nail!")
+            res.redirect("/collections")
     })
 })
 
