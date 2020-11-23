@@ -49,10 +49,15 @@ router.post("/login",passport.authenticate("local",{failureFlash:true,failureRed
 
 //Log out route
 
-router.post("/logout", (req,res)=>{
-    req.session.user_id===null
-    res.redirect("/");
- })
+// router.post("/logout", (req,res)=>{
+//     req.session.user_id===null
+//     res.redirect("/");
+//  })
 
+router.get("/logout", (req,res)=>{
+  req.logout();
+  req.flash("success","Goodbye!")
+  res.redirect("/")
+})
 
  module.exports = router;

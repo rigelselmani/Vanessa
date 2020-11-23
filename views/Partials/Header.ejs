@@ -8,23 +8,23 @@
     <title>Vanessa</title>
 </head>
 <body>
-      <ul class="nav justify-content-center fixed-top" style="font-size:22px;background:#f566cf;">
-        <li class="nav-item" style="padding:10px">
+  <div class="navbar sticky-top navbar-expand-lg navbar-dark" style="font-size:22px;background:#f566cf;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav">
           <a class="nav-link text-white" href="/">Home</a>
-        </li>
-        <li class="nav-item" style="padding:10px;">
           <a class="nav-link text-white" href="/collections">Collections</a>
-        </li>
-   
-        <li class="nav-item" style="padding:10px 0px">
           <a class="nav-link text-white" href="/new">New Nail</a>
-        </li>
-        <form class="nav-item"style="padding:10px 0px" action="/logout" method="POST">
-          <button class="nav-link text-white"style="border:none;background:#f566cf;">Logout</button>
-        </form>
-        <li class="nav-item" style="padding:10px 0px">
+        </div>
+        <div class="navbar-nav ml-auto">
           <a class="nav-link text-white" href="/login">Login</a>
-        </li>
-
-      </ul>
+          <a class="nav-link text-white" href="/register">Register</a>
+          <a class="nav-link text-white" href="/login">Login</a>
+        </div>
+      </div>
     </div>
+  </div>
