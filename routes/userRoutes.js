@@ -3,7 +3,7 @@ const express = require("express"),
       passport=require("passport");
       User    =require("../models/User");
 
-
+//Register routes
 router.get("/register",async (req,res)=>{
     res.render("Register")
 })
@@ -11,7 +11,11 @@ router.post("/register",async(req,res)=>{
     const {username,password}=req.body;
     const user = new User({username});
     const registeredUser = await User.register(user,password);
-    console.log(registeredUser);
+    req.login(registeredUser,err=>{
+      if(err)return next(err);
+      req.flash("success","Welcome to yelp camp!");
+      res.redirect("/");
+    })
 
 
     // const hash = await bcrypt.hash(password,12);
@@ -30,7 +34,6 @@ router.get("/login",async(req,res)=>{
 })
 router.post("/login",passport.authenticate("local",{failureFlash:true,failureRedirect:"/login"}), async(req,res)=>{
   res.redirect("/")
-
 
 // const user = await User.findOne({username})
 // if(user===null){
