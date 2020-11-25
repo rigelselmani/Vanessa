@@ -8,14 +8,15 @@
     <p><%=nail.name%></p>
     <p><%= nail.description %></p>
   </div>
-  <% if(currentUser.id==="5fbd218ef3a0a42c783e916c"){ %>
     <div class="justify-content-start mt-1">
+      <% if(!currentUser){%>
+      <%} else {%>
         <a href="/<%=nail._id%>/edit" class=" btn btn-primary mr-2 bg-info">Edit</a>
         <form id="delete-form" action="/<%=nail._id%>?_method=DELETE" method="POST">
           <button  class="btn btn-danger">Delete</button>
         </form>
+      <% } %>
     </div>
-    <% } %>
   </div>
 </div>
 

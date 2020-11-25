@@ -77,7 +77,7 @@ router.delete("/:id",isLoggedIn,function(req,res){
             console.log(err)
             res.redirect("/collections")
         }
-        req.flash("success","Successfully deleted campground!")
+        req.flash("success","Successfully deleted Nail!")
         res.redirect("/collections")
     })
 })

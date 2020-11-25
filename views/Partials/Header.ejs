@@ -10,7 +10,7 @@
 <body>
   <div class="navbar sticky-top navbar-expand-lg navbar-dark" style="font-size:22px;background:#f566cf;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="/">Navbar</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -18,14 +18,13 @@
         <div class="navbar-nav">
           <a class="nav-link text-white" href="/">Home</a>
           <a class="nav-link text-white" href="/collections">Collections</a>
-          <a class="nav-link text-white" href="/new">New Nail</a>
         </div>
         <div class="navbar-nav ml-auto">
-          <% if(!currentUser){ %>
+        <% if(currentUser){ %>
+          <a class="nav-link text-white" href="/logout">Logout</a>
+        <% }else{ %>
           <a class="nav-link text-white" href="/login">Login</a>
           <a class="nav-link text-white" href="/register">Register</a>
-        <% }else{ %>
-          <a class="nav-link text-white" href="/logout">Logout</a>
           <% } %>
         </div>
       </div>

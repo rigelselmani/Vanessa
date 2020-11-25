@@ -12,8 +12,13 @@
             <p class="card-text"><%- nail.description.substring(0,30) %>... <a href="/nail/<%=nail._id%>"> Read More</a></p>  
           </div>
       </div> 
-    <%})%>   
+    <%})%>     
   </div>
+  <% if(!currentUser){%>
+  <%} else {%>
+    <a class="nav-link text-dark" href="/new">Add New Nail</a>
+  <%}%>
 </div>
+
 
 <%- include('partials/Footer') %>
