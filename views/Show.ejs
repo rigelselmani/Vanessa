@@ -9,8 +9,8 @@
     <p><%= nail.description %></p>
   </div>
     <div class="justify-content-start mt-1">
-      <% if(!currentUser){%>
-      <%} else {%>
+      <% if(!currentUser||currentUser.username!=="vanessa"){%>
+        <%} else {%>
         <a href="/<%=nail._id%>/edit" class=" btn btn-primary mr-2 bg-info">Edit</a>
         <form id="delete-form" action="/<%=nail._id%>?_method=DELETE" method="POST">
           <button  class="btn btn-danger">Delete</button>

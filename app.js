@@ -32,7 +32,13 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next)=>{
+    
     res.locals.currentUser =req.user;
+    // if(req.user==="undefined"){
+    //     req.user="rigel"
+    // }else{
+    //     req.user
+    // }
     res.locals.success = req.flash("success");
     res.locals.error =req.flash("error");
     next();
