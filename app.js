@@ -11,8 +11,9 @@ const express        = require("express"),
       passport       = require("passport"),
       localStrategy  =require("passport-local"),
       User           =require("./models/User");
+      require("dotenv").config();
 
-    mongoose.connect('mongodb://localhost:27017/nail', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true,useFindAndModify:false}).then(res=>{
+    mongoose.connect(process.env.DATABASE,{useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true,useFindAndModify:false}).then(res=>{
         console.log("DB Connected!")
     }).catch(err => {
     console.log(Error, err.message);
@@ -43,6 +44,8 @@ app.use("/",showRoutes);
 app.use("/",subscribeRoutes);
 app.use("/",userRoutes);
 
-app.listen(3000, () => {
-    console.log(`Example app listening at http://localhost 3000`)
-  })
+const PORT =process.env.PORT || 3000
+
+app.listen(PORT, () => {
+    console.log(`Example app listening at http://localhost ${PORT}`)
+  });
