@@ -13,7 +13,7 @@ const express        = require("express"),
       User           =require("./models/User");
       require("dotenv").config();
 
-    mongoose.connect(process.env.DATABASE,{useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true,useFindAndModify:false}).then(res=>{
+    mongoose.connect(process.env.DATABASE,{useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true,useFindAndModify: false}).then(res=>{
         console.log("DB Connected!")
     }).catch(err => {
     console.log(Error, err.message);
