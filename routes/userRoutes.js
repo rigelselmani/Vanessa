@@ -25,7 +25,7 @@ router.post("/register",async(req,res)=>{
     // })
     // await user.save();
     // req.session.user_id = user._id;
-    res.redirect("/");
+   return res.redirect("/");
 })
 
 //Login route
