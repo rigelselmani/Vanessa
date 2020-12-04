@@ -1,20 +1,19 @@
 <%- include('partials/Header') %>
 
 <div class="container text-center mt-4">
-    <h1>This is the show template</h1>
   <div class="img-thumbnail mx-auto"> 
-    <img src="<%=nail.image%>"style="width:50%;height:340px;">
-  <div class="caption"> 
-    <p><%=nail.name%></p>
-    <p><%= nail.description %></p>
+    <img src="<%=nail.image%>"style="width:75%;height:400px;">
+  <div class="caption mt-4 text-center mx-auto" style="width:75%;" > 
+    <p  class="mb-1 text-left"><strong>Style: </strong> <%=nail.name%></p>
+    <p class="text-left"><strong>Description: </strong> <%= nail.description %></p>
   </div>
-    <div class="justify-content-start mt-1">
+    <div class="mt-1" style="margin-right:67%">
       <% if(!currentUser||currentUser.username!=="vanessa"){%>
         <%} else {%>
-        <a href="/<%=nail._id%>/edit" class=" btn btn-primary mr-2 bg-info">Edit</a>
-        <form id="delete-form" action="/<%=nail._id%>?_method=DELETE" method="POST">
-          <button  class="btn btn-danger">Delete</button>
-        </form>
+          <form id="delete-form" action="/<%=nail._id%>?_method=DELETE" method="POST">
+            <button  class="btn btn-danger" style="position:absolute;margin-left:1.8%">Delete</button>
+          </form>
+          <a href="/<%=nail._id%>/edit" class=" btn btn-primary mr-2 mb-4 bg-info" style="width:22%;">Edit </a>
       <% } %>
     </div>
   </div>
