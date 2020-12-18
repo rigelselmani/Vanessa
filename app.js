@@ -6,7 +6,8 @@ const express        = require("express"),
       methodOverride = require("method-override"),
       mongoose       =require("mongoose"),
       session        =require("express-session"),
-      flash          =require("connect-flash")
+      flash          =require("connect-flash"),
+      path           =require("path"),
       showRoutes     =require("./routes/showRoutes"),
       subscribeRoutes=require("./routes/subscribeRoute"),
       userRoutes     =require("./routes/userRoutes"),
@@ -49,6 +50,7 @@ const sessionConfig = {
     }
 
 }
+app.set('views', path.join(__dirname, './Views'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
